@@ -9,14 +9,14 @@ export default function Contact() {
       <div className="container mx-auto">
         {/* Header */}
         <div className="text-center mb-12">
-          <span className="text-xs tracking-luxe uppercase text-accent-600 reveal-text" style={{ animationDelay: '0.1s' }}>
+          <span className="text-xs tracking-luxe uppercase text-accent-400 reveal-text" style={{ animationDelay: '0.1s' }}>
             Contact & Order Hub
           </span>
-          <h1 className="luxury-heading text-charcoal-700 mt-3 reveal-text" style={{ animationDelay: '0.15s', fontSize: 'clamp(2.2rem, 5vw, 3.8rem)' }}>
+          <h1 className="luxury-heading text-ink-100 mt-3 reveal-text" style={{ animationDelay: '0.15s', fontSize: 'clamp(2.2rem, 5vw, 3.8rem)' }}>
             Come Say Hello
           </h1>
-          <p className="text-charcoal-500 max-w-2xl mx-auto mt-4 reveal-text" style={{ animationDelay: '0.2s' }}>
-            Whether you're stopping by for a cold-pressed juice, placing a delivery order,
+          <p className="text-ink-300 max-w-2xl mx-auto mt-4 reveal-text" style={{ animationDelay: '0.2s' }}>
+            Whether you're stopping by for a cold-pressed juice, ordering through DoorDash,
             or just curious about our story — we'd love to hear from you.
           </p>
         </div>
@@ -29,8 +29,8 @@ export default function Contact() {
               <iframe
                 src={mapSrc}
                 title="Wild Bunch Wellness Bar location map"
-                className="map-iframe w-full h-full"
-                style={{ border: 0, minHeight: '420px', filter: 'saturate(0.8) contrast(0.95)' }}
+                className="w-full h-full"
+                style={{ border: 0, minHeight: '420px', filter: 'invert(0.9) hue-rotate(170deg) saturate(0.6) brightness(0.9)' }}
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
               />
@@ -39,7 +39,7 @@ export default function Contact() {
 
           {/* Contact Card */}
           <div className="glass-card rounded-3xl p-7 sm:p-9 reveal-text" style={{ animationDelay: '0.3s' }}>
-            <h2 className="luxury-heading text-2xl text-charcoal-700 mb-6">Reach Us Directly</h2>
+            <h2 className="luxury-heading text-2xl text-ink-100 mb-6">Reach Us Directly</h2>
 
             <div className="space-y-5">
               <ContactRow
@@ -66,15 +66,15 @@ export default function Contact() {
               />
             </div>
 
-            <div className="my-7 h-px bg-white/30" />
+            <div className="my-7 h-px bg-white/10" />
 
             {/* Action Portals */}
-            <h3 className="text-xs tracking-luxe uppercase text-sage-500 mb-4">Order & Follow</h3>
+            <h3 className="text-xs tracking-luxe uppercase text-sage-400 mb-4">Order & Follow</h3>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               <PortalLink
                 href={BRAND.doorDash}
                 label="DoorDash"
-                sublabel="Order Delivery"
+                sublabel="Order Online"
               />
               <PortalLink
                 href={BRAND.facebook}
@@ -95,10 +95,10 @@ export default function Contact() {
         {/* Directions Banner */}
         <div className="glass-card rounded-3xl p-7 sm:p-9 flex flex-col sm:flex-row items-center justify-between gap-6 reveal-text" style={{ animationDelay: '0.35s' }}>
           <div className="text-center sm:text-left">
-            <h2 className="luxury-heading text-xl sm:text-2xl text-charcoal-700 mb-2">
+            <h2 className="luxury-heading text-xl sm:text-2xl text-ink-100 mb-2">
               Planning your visit?
             </h2>
-            <p className="text-sm text-charcoal-400">
+            <p className="text-sm text-ink-400">
               We're right in the heart of Downtown Tiffin. Easy parking on Market Street.
             </p>
           </div>
@@ -120,12 +120,12 @@ export default function Contact() {
 function ContactRow({ icon, label, value, href }: { icon: React.ReactNode; label: string; value: string; href?: string }) {
   const content = (
     <div className="flex items-start gap-4">
-      <div className="w-11 h-11 rounded-xl flex items-center justify-center text-sage-600 shrink-0" style={{ background: 'rgba(199,211,186,0.3)' }}>
+      <div className="w-11 h-11 rounded-xl flex items-center justify-center text-sage-300 shrink-0" style={{ background: 'rgba(199,211,186,0.3)' }}>
         {icon}
       </div>
       <div>
-        <div className="text-[10px] tracking-luxe uppercase text-sage-500 mb-1">{label}</div>
-        <div className="text-charcoal-600 text-sm sm:text-base">{value}</div>
+        <div className="text-[10px] tracking-luxe uppercase text-sage-400 mb-1">{label}</div>
+        <div className="text-ink-200 text-sm sm:text-base">{value}</div>
       </div>
     </div>
   );
@@ -144,12 +144,12 @@ function PortalLink({ href, label, sublabel, icon }: { href: string; label: stri
       rel="noopener noreferrer"
       className="glass-btn rounded-2xl p-4 text-center group"
     >
-      <div className="flex items-center justify-center gap-1.5 text-charcoal-600 mb-1">
+      <div className="flex items-center justify-center gap-1.5 text-ink-200 mb-1">
         {icon}
         <span className="luxury-heading text-base">{label}</span>
-        <ArrowUpRight size={13} strokeWidth={1.5} className="text-sage-500 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+        <ArrowUpRight size={13} strokeWidth={1.5} className="text-sage-400 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
       </div>
-      <div className="text-[10px] tracking-wide-2 uppercase text-charcoal-400">{sublabel}</div>
+      <div className="text-[10px] tracking-wide-2 uppercase text-ink-400 break-all">{sublabel}</div>
     </a>
   );
 }

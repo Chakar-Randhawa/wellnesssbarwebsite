@@ -29,10 +29,10 @@ export default function Home({ onNavigate }: HomeProps) {
             >
               <img
                 src={src}
-                alt="Organic wellness"
+                alt={i === 0 ? 'Fresh organic juices and healthy food at Wild Bunch Wellness Bar' : ''}
                 className="w-full h-full object-cover"
               />
-              <div className="hero-overlay absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(244,241,234,0.3) 0%, rgba(244,241,234,0.5) 50%, rgba(244,241,234,0.85) 100%)' }} />
+              <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(20,20,26,0.4) 0%, rgba(20,20,26,0.6) 50%, rgba(20,20,26,0.92) 100%)' }} />
             </div>
           ))}
         </div>
@@ -40,22 +40,22 @@ export default function Home({ onNavigate }: HomeProps) {
         {/* Hero Content */}
         <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-4 pt-16">
           <div className="reveal-text flex items-center gap-2 mb-6" style={{ animationDelay: '0.1s' }}>
-            <Leaf size={16} className="text-sage-500" strokeWidth={1.5} />
-            <span className="text-xs tracking-luxe uppercase text-sage-600">Organic &middot; Cold-Pressed &middot; Handcrafted</span>
-            <Leaf size={16} className="text-sage-500" strokeWidth={1.5} />
+            <Leaf size={16} className="text-sage-400" strokeWidth={1.5} />
+            <span className="text-xs tracking-luxe uppercase text-sage-300">Organic &middot; Cold-Pressed &middot; Handcrafted</span>
+            <Leaf size={16} className="text-sage-400" strokeWidth={1.5} />
           </div>
 
           <h1
-            className="reveal-text luxury-heading text-charcoal-700 max-w-4xl mx-auto"
+            className="reveal-text luxury-heading text-ink-100 max-w-4xl mx-auto"
             style={{ animationDelay: '0.2s', fontSize: 'clamp(2.2rem, 6vw, 4.5rem)' }}
           >
-            {BRAND.tagline.split(',')[0]},
+            Tastes Like a Cheat Meal,
             <br className="hidden sm:block" />
-            <span className="luxury-italic text-gradient-sage"> {BRAND.tagline.split(',').slice(1).join(',')}</span>
+            <span className="luxury-italic text-gradient-sage"> Fuels Your Body Like a Power Meal!</span>
           </h1>
 
           <p
-            className="reveal-text text-charcoal-500 text-base sm:text-lg max-w-2xl mx-auto mt-6 leading-relaxed"
+            className="reveal-text text-ink-300 text-base sm:text-lg max-w-2xl mx-auto mt-6 leading-relaxed"
             style={{ animationDelay: '0.35s' }}
           >
             {BRAND.subTagline}
@@ -69,16 +69,16 @@ export default function Home({ onNavigate }: HomeProps) {
               onClick={() => onNavigate('menu')}
               className="glass-btn-solid px-8 py-3.5 rounded-full text-sm tracking-wide-2 uppercase flex items-center gap-2 group"
             >
-              Explore the Menu
+              Explore Our Healthy Menu
               <ArrowRight size={16} strokeWidth={1.5} className="transition-transform group-hover:translate-x-1" />
             </button>
             <a
               href={BRAND.doorDash}
               target="_blank"
               rel="noopener noreferrer"
-              className="glass-btn px-8 py-3.5 rounded-full text-sm tracking-wide-2 uppercase text-charcoal-600 hover:text-sage-600 flex items-center gap-2"
+              className="glass-btn px-8 py-3.5 rounded-full text-sm tracking-wide-2 uppercase text-ink-200 hover:text-sage-300 flex items-center gap-2"
             >
-              Order on DoorDash
+              Order via DoorDash
               <ArrowRight size={16} strokeWidth={1.5} />
             </a>
           </div>
@@ -92,7 +92,8 @@ export default function Home({ onNavigate }: HomeProps) {
                 className={`h-1 rounded-full transition-all duration-500 ${
                   i === currentSlide ? 'w-8 bg-sage-500' : 'w-2 bg-sage-300/60'
                 }`}
-                aria-label={`Slide ${i + 1}`}
+                aria-label={`Show slide ${i + 1}`}
+                aria-current={i === currentSlide ? 'true' : undefined}
               />
             ))}
           </div>
@@ -100,7 +101,7 @@ export default function Home({ onNavigate }: HomeProps) {
 
         {/* Scroll Hint */}
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce">
-          <span className="text-[10px] tracking-luxe uppercase text-charcoal-400">Scroll</span>
+          <span className="text-[10px] tracking-luxe uppercase text-ink-400">Scroll</span>
           <div className="w-px h-8 bg-gradient-to-b from-sage-400 to-transparent" />
         </div>
       </section>
@@ -112,17 +113,18 @@ export default function Home({ onNavigate }: HomeProps) {
             <InfoCard
               icon={<Clock size={22} strokeWidth={1.5} />}
               label="Hours"
-              lines={['Mon – Sun', '7:00 AM – 2:00 PM']}
+              value={BRAND.hours}
             />
             <InfoCard
               icon={<MapPin size={22} strokeWidth={1.5} />}
-              label="Location"
-              lines={['71 E Market St', 'Downtown Tiffin, Ohio']}
+              label="Address"
+              value={BRAND.address}
             />
             <InfoCard
               icon={<Phone size={22} strokeWidth={1.5} />}
               label="Contact"
-              lines={['(567) 938-8900', 'Call to order']}
+              value={BRAND.phone}
+              href={`tel:${BRAND.phone.replace(/[^0-9]/g, '')}`}
             />
           </div>
         </div>
@@ -132,43 +134,42 @@ export default function Home({ onNavigate }: HomeProps) {
       <section className="py-20 lg:py-32 px-4">
         <div className="container mx-auto max-w-5xl text-center">
           <div className="flex items-center justify-center gap-2 mb-6">
-            <Sparkles size={16} className="text-accent-500" strokeWidth={1.5} />
-            <span className="text-xs tracking-luxe uppercase text-accent-600">Our Philosophy</span>
-            <Sparkles size={16} className="text-accent-500" strokeWidth={1.5} />
+            <Sparkles size={16} className="text-accent-400" strokeWidth={1.5} />
+            <span className="text-xs tracking-luxe uppercase text-accent-400">Our Philosophy</span>
+            <Sparkles size={16} className="text-accent-400" strokeWidth={1.5} />
           </div>
-          <h2 className="luxury-heading text-charcoal-700 mb-6" style={{ fontSize: 'clamp(1.8rem, 4vw, 3rem)' }}>
+          <h2 className="luxury-heading text-ink-100 mb-6" style={{ fontSize: 'clamp(1.8rem, 4vw, 3rem)' }}>
             Nature knows best.
             <br />
             <span className="luxury-italic text-gradient-sage">We just listen carefully.</span>
           </h2>
-          <p className="text-charcoal-500 text-base sm:text-lg leading-relaxed max-w-3xl mx-auto">
-            Every bottle, bowl, and brew at Wild Bunch is a reflection of one belief: that food should
-            be medicine, and medicine should be delicious. We source from organic farms, press to order,
-            and never compromise on purity. No fillers. No preservatives. No shortcuts. Just the way
-            nature intended.
+          <p className="text-ink-300 text-base sm:text-lg leading-relaxed max-w-3xl mx-auto">
+            What you put into your body matters. That is why everything we serve is prepared fresh
+            daily using only non-toxic, premium, organic ingredients. Nothing artificial. No shortcuts.
+            Just good food and drink that tastes as good as it makes you feel.
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-14">
             <PhilosophyCard
               icon={<Leaf size={28} strokeWidth={1.2} />}
               title="100% Organic"
-              text="Every ingredient is certified organic, traceable to the farm it grew on."
+              text="Premium organic ingredients and absolutely nothing artificial."
             />
             <PhilosophyCard
               icon={<Heart size={28} strokeWidth={1.2} />}
               title="Nurse-Founded"
-              text="Created by a Registered Nurse with 20+ years of clinical experience."
+              text="Created by a Registered Nurse with over two decades of experience serving the community."
             />
             <PhilosophyCard
               icon={<Sparkles size={28} strokeWidth={1.2} />}
-              title="Pressed Fresh"
-              text="Cold-pressed to order daily, preserving maximum nutrients and flavor."
+              title="Made Fresh Daily"
+              text="Everything is prepared fresh daily, from cold-pressed juices to hearty bowls."
             />
           </div>
 
           <button
             onClick={() => onNavigate('story')}
-            className="mt-12 glass-btn px-7 py-3 rounded-full text-sm tracking-wide-2 uppercase text-charcoal-600 hover:text-sage-600 flex items-center gap-2 mx-auto group"
+            className="mt-12 glass-btn px-7 py-3 rounded-full text-sm tracking-wide-2 uppercase text-ink-200 hover:text-sage-300 flex items-center gap-2 mx-auto group"
           >
             Read Our Story
             <ArrowRight size={15} strokeWidth={1.5} className="transition-transform group-hover:translate-x-1" />
@@ -180,8 +181,8 @@ export default function Home({ onNavigate }: HomeProps) {
       <section className="py-20 px-4">
         <div className="container mx-auto">
           <div className="text-center mb-12">
-            <span className="text-xs tracking-luxe uppercase text-accent-600">Signature Selection</span>
-            <h2 className="luxury-heading text-charcoal-700 mt-3" style={{ fontSize: 'clamp(1.8rem, 4vw, 3rem)' }}>
+            <span className="text-xs tracking-luxe uppercase text-accent-400">Signature Selection</span>
+            <h2 className="luxury-heading text-ink-100 mt-3" style={{ fontSize: 'clamp(1.8rem, 4vw, 3rem)' }}>
               Crowd Favorites
             </h2>
           </div>
@@ -229,11 +230,11 @@ export default function Home({ onNavigate }: HomeProps) {
             <div className="absolute -top-20 -right-20 w-60 h-60 rounded-full opacity-20" style={{ background: 'radial-gradient(circle, #c7d3ba 0%, transparent 70%)' }} />
             <div className="absolute -bottom-20 -left-20 w-60 h-60 rounded-full opacity-20" style={{ background: 'radial-gradient(circle, #e8e2d4 0%, transparent 70%)' }} />
             <div className="relative z-10">
-              <h2 className="luxury-heading text-charcoal-700 mb-4" style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.5rem)' }}>
+              <h2 className="luxury-heading text-ink-100 mb-4" style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.5rem)' }}>
                 Ready to fuel your body <span className="luxury-italic text-gradient-sage">the right way?</span>
               </h2>
-              <p className="text-charcoal-500 max-w-xl mx-auto mb-8">
-                Order ahead for pickup or delivery through DoorDash. Your wellness journey starts with one cold-pressed sip.
+              <p className="text-ink-300 max-w-xl mx-auto mb-8">
+                Order through DoorDash or stop by the bar in Downtown Tiffin. Your wellness journey starts with one cold-pressed sip.
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <a
@@ -242,11 +243,11 @@ export default function Home({ onNavigate }: HomeProps) {
                   rel="noopener noreferrer"
                   className="glass-btn-solid px-8 py-3.5 rounded-full text-sm tracking-wide-2 uppercase"
                 >
-                  Order on DoorDash
+                  Order via DoorDash
                 </a>
                 <button
                   onClick={() => onNavigate('contact')}
-                  className="glass-btn px-8 py-3.5 rounded-full text-sm tracking-wide-2 uppercase text-charcoal-600 hover:text-sage-600"
+                  className="glass-btn px-8 py-3.5 rounded-full text-sm tracking-wide-2 uppercase text-ink-200 hover:text-sage-300"
                 >
                   Visit Us
                 </button>
@@ -259,30 +260,34 @@ export default function Home({ onNavigate }: HomeProps) {
   );
 }
 
-function InfoCard({ icon, label, lines }: { icon: React.ReactNode; label: string; lines: string[] }) {
-  return (
-    <div className="glass-card rounded-2xl px-6 py-5 flex items-center gap-4">
-      <div className="w-12 h-12 rounded-xl flex items-center justify-center text-sage-600 shrink-0" style={{ background: 'rgba(199,211,186,0.3)' }}>
+function InfoCard({ icon, label, value, href }: { icon: React.ReactNode; label: string; value: string; href?: string }) {
+  const body = (
+    <>
+      <div className="w-12 h-12 rounded-xl flex items-center justify-center text-sage-300 shrink-0" style={{ background: 'rgba(86,110,68,0.25)' }}>
         {icon}
       </div>
-      <div>
-        <div className="text-[10px] tracking-luxe uppercase text-sage-500 mb-1">{label}</div>
-        {lines.map((line, i) => (
-          <div key={i} className="text-sm text-charcoal-600 leading-snug">{line}</div>
-        ))}
+      <div className="min-w-0">
+        <div className="text-[11px] tracking-luxe uppercase text-sage-300 mb-1">{label}</div>
+        <div className="text-sm text-ink-200 leading-snug">{value}</div>
       </div>
-    </div>
+    </>
+  );
+  const cls = 'glass-card rounded-2xl px-6 py-5 flex items-center gap-4';
+  return href ? (
+    <a href={href} className={cls}>{body}</a>
+  ) : (
+    <div className={cls}>{body}</div>
   );
 }
 
 function PhilosophyCard({ icon, title, text }: { icon: React.ReactNode; title: string; text: string }) {
   return (
     <div className="glass-card rounded-2xl px-6 py-8 text-center">
-      <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-sage-600 mx-auto mb-4" style={{ background: 'rgba(199,211,186,0.25)' }}>
+      <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-sage-300 mx-auto mb-4" style={{ background: 'rgba(86,110,68,0.25)' }}>
         {icon}
       </div>
-      <h3 className="luxury-heading text-xl text-charcoal-700 mb-2">{title}</h3>
-      <p className="text-sm text-charcoal-400 leading-relaxed">{text}</p>
+      <h3 className="luxury-heading text-xl text-ink-100 mb-2">{title}</h3>
+      <p className="text-sm text-ink-400 leading-relaxed">{text}</p>
     </div>
   );
 }
@@ -295,11 +300,11 @@ function FeaturedCard({ image, title, subtitle, price, onClick }: { image: strin
       </div>
       <div className="p-6">
         <div className="flex items-center justify-between mb-1">
-          <h3 className="luxury-heading text-xl text-charcoal-700">{title}</h3>
-          <span className="text-accent-600 luxury-heading text-lg">{price}</span>
+          <h3 className="luxury-heading text-xl text-ink-100">{title}</h3>
+          <span className="text-accent-400 luxury-heading text-lg">{price}</span>
         </div>
-        <p className="text-sm text-charcoal-400">{subtitle}</p>
-        <div className="flex items-center gap-1.5 mt-4 text-sage-600 text-xs tracking-wide-2 uppercase">
+        <p className="text-sm text-ink-400">{subtitle}</p>
+        <div className="flex items-center gap-1.5 mt-4 text-sage-300 text-xs tracking-wide-2 uppercase">
           View Menu <ArrowRight size={13} strokeWidth={1.5} className="transition-transform group-hover:translate-x-1" />
         </div>
       </div>

@@ -20,11 +20,11 @@ export default function Footer({ onNavigate }: FooterProps) {
                   className="w-12 h-12 rounded-full object-cover ring-1 ring-white/40"
                 />
                 <div>
-                  <div className="luxury-heading text-xl text-charcoal-700 leading-none">Wild Bunch</div>
-                  <div className="text-[10px] tracking-luxe uppercase text-sage-500 mt-1">Wellness Bar</div>
+                  <div className="luxury-heading text-xl text-ink-100 leading-none">Wild Bunch</div>
+                  <div className="text-[10px] tracking-luxe uppercase text-sage-400 mt-1">Wellness Bar</div>
                 </div>
               </div>
-              <p className="text-sm text-charcoal-400 leading-relaxed max-w-xs">
+              <p className="text-sm text-ink-400 leading-relaxed max-w-xs">
                 Premium organic cold-pressed juicery, wellness bar, and organic kitchen.
                 Tastes like a cheat meal, fuels your body like a power meal.
               </p>
@@ -32,7 +32,7 @@ export default function Footer({ onNavigate }: FooterProps) {
 
             {/* Navigation Column */}
             <div>
-              <h4 className="luxury-heading text-base text-charcoal-600 mb-4 tracking-wide-2 uppercase">
+              <h4 className="luxury-heading text-base text-ink-200 mb-4 tracking-wide-2 uppercase">
                 Explore
               </h4>
               <ul className="space-y-2.5">
@@ -40,7 +40,7 @@ export default function Footer({ onNavigate }: FooterProps) {
                   <li key={link.id}>
                     <button
                       onClick={() => onNavigate(link.id)}
-                      className="link-underline text-sm text-charcoal-400 hover:text-sage-600 transition-colors"
+                      className="link-underline text-sm text-ink-400 hover:text-sage-300 transition-colors"
                     >
                       {link.label}
                     </button>
@@ -51,27 +51,27 @@ export default function Footer({ onNavigate }: FooterProps) {
 
             {/* Hours & Location Column */}
             <div>
-              <h4 className="luxury-heading text-base text-charcoal-600 mb-4 tracking-wide-2 uppercase">
+              <h4 className="luxury-heading text-base text-ink-200 mb-4 tracking-wide-2 uppercase">
                 Visit Us
               </h4>
-              <ul className="space-y-3 text-sm text-charcoal-400">
+              <ul className="space-y-3 text-sm text-ink-400">
                 <li className="flex items-start gap-2.5">
-                  <Clock size={15} className="text-sage-500 mt-0.5 shrink-0" strokeWidth={1.5} />
+                  <Clock size={15} className="text-sage-400 mt-0.5 shrink-0" strokeWidth={1.5} />
                   <span>{BRAND.hours}</span>
                 </li>
                 <li className="flex items-start gap-2.5">
-                  <MapPin size={15} className="text-sage-500 mt-0.5 shrink-0" strokeWidth={1.5} />
+                  <MapPin size={15} className="text-sage-400 mt-0.5 shrink-0" strokeWidth={1.5} />
                   <span>{BRAND.address}</span>
                 </li>
                 <li className="flex items-start gap-2.5">
-                  <Phone size={15} className="text-sage-500 mt-0.5 shrink-0" strokeWidth={1.5} />
-                  <a href={`tel:${BRAND.phone.replace(/[^0-9]/g, '')}`} className="hover:text-sage-600 transition-colors">
+                  <Phone size={15} className="text-sage-400 mt-0.5 shrink-0" strokeWidth={1.5} />
+                  <a href={`tel:${BRAND.phone.replace(/[^0-9]/g, '')}`} className="hover:text-sage-300 transition-colors">
                     {BRAND.phone}
                   </a>
                 </li>
                 <li className="flex items-start gap-2.5">
-                  <Mail size={15} className="text-sage-500 mt-0.5 shrink-0" strokeWidth={1.5} />
-                  <a href={`mailto:${BRAND.email}`} className="hover:text-sage-600 transition-colors break-all">
+                  <Mail size={15} className="text-sage-400 mt-0.5 shrink-0" strokeWidth={1.5} />
+                  <a href={`mailto:${BRAND.email}`} className="hover:text-sage-300 transition-colors break-all">
                     {BRAND.email}
                   </a>
                 </li>
@@ -80,7 +80,7 @@ export default function Footer({ onNavigate }: FooterProps) {
 
             {/* Social & Connect Column */}
             <div>
-              <h4 className="luxury-heading text-base text-charcoal-600 mb-4 tracking-wide-2 uppercase">
+              <h4 className="luxury-heading text-base text-ink-200 mb-4 tracking-wide-2 uppercase">
                 Connect
               </h4>
               <div className="flex gap-3 mb-4">
@@ -88,7 +88,7 @@ export default function Footer({ onNavigate }: FooterProps) {
                   href={BRAND.instagramUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="glass-btn w-10 h-10 rounded-full flex items-center justify-center text-charcoal-500 hover:text-sage-600"
+                  className="glass-btn w-10 h-10 rounded-full flex items-center justify-center text-ink-300 hover:text-sage-300"
                   aria-label="Instagram"
                 >
                   <Instagram size={17} strokeWidth={1.5} />
@@ -97,7 +97,7 @@ export default function Footer({ onNavigate }: FooterProps) {
                   href={BRAND.facebook}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="glass-btn w-10 h-10 rounded-full flex items-center justify-center text-charcoal-500 hover:text-sage-600"
+                  className="glass-btn w-10 h-10 rounded-full flex items-center justify-center text-ink-300 hover:text-sage-300"
                   aria-label="Facebook"
                 >
                   <Facebook size={17} strokeWidth={1.5} />
@@ -106,23 +106,23 @@ export default function Footer({ onNavigate }: FooterProps) {
                   href={BRAND.doorDash}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="glass-btn px-4 h-10 rounded-full flex items-center justify-center text-xs tracking-wide-2 uppercase text-charcoal-500 hover:text-sage-600"
+                  className="glass-btn px-4 h-10 rounded-full flex items-center justify-center text-xs tracking-wide-2 uppercase text-ink-300 hover:text-sage-300"
                 >
                   DoorDash
                 </a>
               </div>
-              <p className="text-xs text-charcoal-400 tracking-wide-2">
+              <p className="text-xs text-ink-400 tracking-wide-2">
                 Instagram: {BRAND.instagram}
               </p>
             </div>
           </div>
 
           {/* Bottom Bar */}
-          <div className="mt-10 pt-6 border-t border-white/30 flex flex-col sm:flex-row items-center justify-between gap-3">
-            <p className="text-xs text-charcoal-400 tracking-wide-2 text-center sm:text-left">
+          <div className="mt-10 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3">
+            <p className="text-xs text-ink-400 tracking-wide-2 text-center sm:text-left">
               &copy; {new Date().getFullYear()} {BRAND.name}. All rights reserved.
             </p>
-            <p className="text-xs text-charcoal-400 tracking-wide-2">
+            <p className="text-xs text-ink-400 tracking-wide-2">
               Crafted with intention &mdash; Tiffin, Ohio
             </p>
           </div>

@@ -1,0 +1,3 @@
+GitHub se sirf ye ek file delete karni hai:
+  src/hooks/useTheme.ts      (light/dark toggle ka hook, ab zaroorat nahi)
+(Is ke baad src/hooks folder khud khali hoke gayab ho jayega.)

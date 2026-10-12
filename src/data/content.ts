@@ -3,14 +3,14 @@ export const BRAND = {
   logo: 'https://i.ibb.co/KpXf7KPq/387112015-122104189364067498-3333333892435933230-n.jpg',
   tagline: 'Tastes Like a Cheat Meal, Fuels Your Body Like a Power Meal.',
   subTagline: '100% Raw, Natural, and Organic Ingredients — Absolutely Nothing Artificial.',
-  hours: 'Mon – Sun: 7:00 AM – 2:00 PM',
+  hours: 'Mon - Sun: 7:00 AM - 2:00 PM',
   address: '71 E Market St, Downtown Tiffin, Ohio',
   phone: '(567) 938-8900',
   email: 'wildbunchwellnessbar@gmail.com',
   instagram: '@wildbunchwellnessbar',
-  doorDash: 'https://www.doordash.com',
-  facebook: 'https://www.facebook.com',
-  instagramUrl: 'https://www.instagram.com',
+  doorDash: 'https://www.doordash.com/store/wild-bunch-wellness-bar-tiffin-34456569/',
+  facebook: 'https://www.facebook.com/p/Wild-Bunch-Wellness-Bar-61552024956606/',
+  instagramUrl: 'https://www.instagram.com/wildbunchwellnessbar/',
 };
 
 export type PageId = 'home' | 'menu' | 'story' | 'retail' | 'contact';
@@ -39,7 +39,7 @@ export type MenuCategory =
 
 export interface MenuItem {
   name: string;
-  price: string;
+  price?: string;
   description: string;
   image: string;
   category: MenuCategory;
@@ -50,7 +50,7 @@ export const MENU_ITEMS: MenuItem[] = [
   {
     name: 'Detox Juice',
     price: '$14.40',
-    description: 'Organic Apple, Cucumber, Celery, Spinach, Kale, Parsley, Lemon, and Activated Charcoal for a deep cellular cleanse.',
+    description: 'Organic Apple, Cucumber, Celery, Spinach, Kale, Parsley, Lemon, and Activated Charcoal.',
     image: 'https://images.pexels.com/photos/4443492/pexels-photo-4443492.jpeg?auto=compress&cs=tinysrgb&w=800',
     category: 'Cold-Pressed Juices & Cleanses',
     tag: 'Signature',
@@ -58,7 +58,7 @@ export const MENU_ITEMS: MenuItem[] = [
   {
     name: '1-Day Juice Cleanse',
     price: '$80.40',
-    description: 'A complete daily reset featuring Pineapple, Blue, Carrot, Beet, Strong Green, and Pink juices — six bottles, one transformation.',
+    description: 'Includes Pineapple, Blue, Carrot, Beet, Strong Green, and Pink juices — six bottles to carry you through the day.',
     image: 'https://images.pexels.com/photos/29851973/pexels-photo-29851973.jpeg?auto=compress&cs=tinysrgb&w=800',
     category: 'Cold-Pressed Juices & Cleanses',
     tag: 'Bestseller',
@@ -80,24 +80,33 @@ export const MENU_ITEMS: MenuItem[] = [
   {
     name: 'Defender Tea',
     price: '$4.20',
-    description: 'A grounding herbal blend of Echinacea, Elderberry, Ginger Root, and Raw Honey. Crafted to fortify your immune system.',
+    description: 'Echinacea, lemon balm, nettle, astragalus root, elderberry, licorice root, orange peel, and ginger.',
     image: 'https://images.pexels.com/photos/6653917/pexels-photo-6653917.jpeg?auto=compress&cs=tinysrgb&w=800',
     category: 'Organic Hot & Iced Teas',
-    tag: 'Immunity',
+    tag: 'Tea Blend',
   },
   {
     name: 'Awaken Tea',
     price: '$4.20',
-    description: 'Yerba Mate, Peppermint, Lemongrass, and Ginseng. A clean, jitter-free awakening for body and mind.',
+    description: 'Sencha green tea, peppermint, spearmint, nettle, lemongrass, and eleuthero root.',
     image: 'https://images.pexels.com/photos/1034044/pexels-photo-1034044.jpeg?auto=compress&cs=tinysrgb&w=800',
     category: 'Organic Hot & Iced Teas',
+    tag: 'Tea Blend',
   },
   {
     name: 'Full Moon Tea',
     price: '$4.20',
-    description: 'Chamomile, Lavender, Valerian Root, and Rose Petals. A nocturnal ritual for deep, restorative rest.',
+    description: 'Red raspberry leaf, nettle, lemon balm, oat straw, rose hips, hibiscus, and ginger.',
     image: 'https://images.pexels.com/photos/10584487/pexels-photo-10584487.jpeg?auto=compress&cs=tinysrgb&w=800',
     category: 'Organic Hot & Iced Teas',
+    tag: 'Tea Blend',
+  },
+  {
+    name: 'Creamy Peanut Butter Smoothie',
+    description: 'A rich, creamy peanut butter smoothie — a satisfying power-meal in a cup.',
+    image: 'https://images.pexels.com/photos/37283271/pexels-photo-37283271.jpeg?auto=compress&cs=tinysrgb&w=800',
+    category: 'Superfood Smoothies & Bowls',
+    tag: 'Contains Peanuts',
   },
   {
     name: 'Acai Bowl',
@@ -221,60 +230,94 @@ export interface RetailProduct {
   category: string;
 }
 
+export const RETAIL_CATEGORIES = ['All', 'Rowe Casa Organics', 'Curly and Spot', 'Wild Bunch & More'];
+
+export const RETAIL_BRANDS = [
+  {
+    name: 'Rowe Casa Organics',
+    tagline: 'Non-toxic home & body',
+    blurb: 'Supplements, essential oils, skincare, household cleaners, and first-aid remedies.',
+  },
+  {
+    name: 'Curly and Spot',
+    tagline: 'Organic dog treats',
+    blurb: 'Natural and organic dog treats for your four-legged family members.',
+  },
+  {
+    name: 'Wild Bunch & More',
+    tagline: 'Wear it. Sip it. Live it.',
+    blurb: 'Custom Wild Bunch T-shirts, premium tea leaves, and organic household goods.',
+  },
+];
+
 export const RETAIL_PRODUCTS: RetailProduct[] = [
   {
-    name: 'Organic Essential Oils',
+    name: 'Supplements',
     brand: 'Rowe Casa Organics',
-    description: 'Pure, therapeutic-grade essential oils — lavender, eucalyptus, peppermint, and tea tree. Steam-distilled, never diluted.',
+    description: 'Organic wellness supplements from Rowe Casa Organics, available at the bar.',
+    image: 'https://images.pexels.com/photos/7615558/pexels-photo-7615558.jpeg?auto=compress&cs=tinysrgb&w=800',
+    category: 'Rowe Casa Organics',
+  },
+  {
+    name: 'Essential Oils',
+    brand: 'Rowe Casa Organics',
+    description: 'Organic essential oils for your home, your routine, and your well-being.',
     image: 'https://images.pexels.com/photos/19572633/pexels-photo-19572633.jpeg?auto=compress&cs=tinysrgb&w=800',
     category: 'Rowe Casa Organics',
   },
   {
-    name: 'Natural Skincare Set',
+    name: 'Natural Skincare',
     brand: 'Rowe Casa Organics',
-    description: 'Clean, non-toxic skincare — facial serum, toner, and moisturizer crafted with organic botanicals and cold-pressed oils.',
+    description: 'Clean, non-toxic skincare made with organic ingredients.',
     image: 'https://images.pexels.com/photos/7615819/pexels-photo-7615819.jpeg?auto=compress&cs=tinysrgb&w=800',
     category: 'Rowe Casa Organics',
   },
   {
-    name: 'Household Remedies',
+    name: 'Household Cleaners & First-Aid Remedies',
     brand: 'Rowe Casa Organics',
-    description: 'Chemical-free home wellness — natural cleaning concentrates, immune support tinctures, and herbal salves.',
+    description: 'Non-toxic household cleaners and natural first-aid remedies for everyday life.',
     image: 'https://images.pexels.com/photos/7615558/pexels-photo-7615558.jpeg?auto=compress&cs=tinysrgb&w=800',
     category: 'Rowe Casa Organics',
   },
   {
     name: 'Organic Dog Treats',
     brand: 'Curly and Spot',
-    description: 'Small-batch, human-grade organic treats for your beloved companion. Free-range, grain-free, and lovingly baked.',
+    description: 'Natural and organic dog treats — because your best friend deserves the good stuff too.',
     image: 'https://images.pexels.com/photos/7309473/pexels-photo-7309473.jpeg?auto=compress&cs=tinysrgb&w=800',
     category: 'Curly and Spot',
   },
   {
-    name: 'Grain-Free Biscuits',
-    brand: 'Curly and Spot',
-    description: 'Wholesome biscuits made with sweet potato, turmeric, and coconut oil. Gentle on sensitive tummies, big on flavor.',
-    image: 'https://images.pexels.com/photos/8121142/pexels-photo-8121142.jpeg?auto=compress&cs=tinysrgb&w=800',
-    category: 'Curly and Spot',
+    name: 'Wild Bunch T-Shirts',
+    brand: 'Wild Bunch Wellness',
+    description: 'Custom Wild Bunch T-shirts — wear the mission wherever you go.',
+    image: 'https://images.pexels.com/photos/9594422/pexels-photo-9594422.jpeg?auto=compress&cs=tinysrgb&w=800',
+    category: 'Wild Bunch & More',
   },
   {
-    name: 'Signature Apparel',
+    name: 'Premium Tea Leaves',
     brand: 'Wild Bunch Wellness',
-    description: 'Premium organic cotton apparel — sweatshirts, tees, and totes featuring the Wild Bunch crest. Soft, sustainable, stylish.',
-    image: 'https://images.pexels.com/photos/9594422/pexels-photo-9594422.jpeg?auto=compress&cs=tinysrgb&w=800',
-    category: 'Wild Bunch Apparel',
+    description: 'Premium loose tea leaves so you can bring the bar\'s teas home.',
+    image: 'https://images.pexels.com/photos/6653917/pexels-photo-6653917.jpeg?auto=compress&cs=tinysrgb&w=800',
+    category: 'Wild Bunch & More',
+  },
+  {
+    name: 'Organic Household Goods',
+    brand: 'Wild Bunch Wellness',
+    description: 'A curated selection of organic household goods for a cleaner, calmer home.',
+    image: 'https://images.pexels.com/photos/7615558/pexels-photo-7615558.jpeg?auto=compress&cs=tinysrgb&w=800',
+    category: 'Wild Bunch & More',
   },
 ];
 
 export const FOUNDER = {
   name: 'Lacie Pace',
   title: 'Registered Nurse & Founder',
-  experience: '20+ Years',
-  image: 'https://images.pexels.com/photos/5215024/pexels-photo-5215024.jpeg?auto=compress&cs=tinysrgb&w=900',
+  experience: 'Over 20 Years',
+  // Add a real photo URL here (e.g. '/lacie.jpg' placed in the /public folder).
+  // While this is empty, a clean placeholder is shown instead.
+  image: '',
   bio: [
-    'Lacie Pace is a Registered Nurse with over 20 years of dedicated healthcare experience. After two decades at the bedside — witnessing firsthand the profound connection between what we put into our bodies and how we heal — she felt called to create something deeper than conventional care.',
-    'Wild Bunch Wellness Bar was born from that calling: a sanctuary where premium, non-toxic, chemical-free nutrition is available to everyone in the community. Every juice is cold-pressed to order, every bowl is built with intention, and every ingredient is traceable to the organic farms it came from.',
-    'This is not a trend. It is a nurse\'s vision — evidence-based, heart-led, and unwaveringly committed to helping people fuel their bodies the way nature intended.',
+    'Founded by Lacie Pace, a Registered Nurse with over two decades of experience serving the community. Her deep passion for healing, health, and holistic wellness inspired the creation of Wild Bunch Wellness Bar. We believe that what you put into your body matters, which is why everything we serve is prepared fresh daily using only non-toxic, premium, organic ingredients.',
   ],
 };
 
@@ -287,28 +330,28 @@ export interface ChatbotQA {
 export const CHATBOT_DATA: ChatbotQA[] = [
   {
     question: 'Who owns the bar?',
-    keywords: ['own', 'owner', 'found', 'who', 'lacie', 'nurse'],
-    answer: 'Wild Bunch Wellness Bar was founded by Lacie Pace, a Registered Nurse with 20+ years of healthcare experience!',
+    keywords: ['own', 'owner', 'found', 'founder', 'who', 'lacie', 'nurse'],
+    answer: 'Wild Bunch Wellness Bar was founded by Lacie Pace, a Registered Nurse with over two decades of experience serving the community.',
   },
   {
     question: 'What are your hours?',
-    keywords: ['hour', 'open', 'time', 'when', 'close', 'day'],
-    answer: 'We are open every day from 7:00 AM to 2:00 PM.',
+    keywords: ['hour', 'open', 'time', 'when', 'close', 'sunday', 'saturday', 'weekend'],
+    answer: 'We are open every day, Monday through Sunday, from 7:00 AM to 2:00 PM.',
   },
   {
     question: 'Where are you located?',
-    keywords: ['where', 'location', 'address', 'find', 'direction', 'tiffin', 'market'],
-    answer: 'Visit us at 71 E Market St, Downtown Tiffin, Ohio.',
+    keywords: ['where', 'location', 'address', 'find', 'direction', 'tiffin', 'market', 'parking'],
+    answer: 'Visit us at 71 E Market St, Downtown Tiffin, Ohio. The Contact page has a map and a Get Directions button.',
   },
   {
     question: 'Do you deliver?',
-    keywords: ['deliver', 'doordash', 'order', 'online', 'shipping', 'ship'],
-    answer: 'Yes! You can order directly through our official DoorDash partner — check the Contact page for the link.',
+    keywords: ['deliver', 'delivery', 'doordash', 'order', 'online', 'shipping', 'ship'],
+    answer: 'Yes! You can order through our DoorDash store — look for the Order on DoorDash button on any page.',
   },
   {
     question: 'What do you serve?',
-    keywords: ['menu', 'serve', 'food', 'juice', 'tea', 'smoothie', 'bowl', 'eat', 'drink'],
-    answer: 'We offer cold-pressed juices, juice cleanses, organic hot & iced teas, superfood smoothies, acai bowls, avocado toast, grain bowls, and roasted veggie paninis. Explore the full Menu page!',
+    keywords: ['menu', 'serve', 'food', 'juice', 'tea', 'smoothie', 'bowl', 'eat', 'drink', 'cleanse', 'toast', 'panini', 'granola'],
+    answer: 'We offer cold-pressed juices and cleanses, organic hot & iced teas, smoothies, acai bowls, avocado toast, grain bowls, roasted veggie paninis, and homemade granola. Explore the full Menu page!',
   },
   {
     question: 'How can I contact you?',
@@ -318,6 +361,16 @@ export const CHATBOT_DATA: ChatbotQA[] = [
   {
     question: 'Are ingredients really organic?',
     keywords: ['organic', 'natural', 'raw', 'artificial', 'chemical', 'ingredient', 'clean'],
-    answer: 'Absolutely. Everything we serve is 100% raw, natural, and organic — no artificial ingredients, ever. That is our core promise.',
+    answer: 'Everything we serve is made with non-toxic, premium, organic ingredients and nothing artificial. That is our core promise.',
+  },
+  {
+    question: 'Do you sell products to take home?',
+    keywords: ['retail', 'shop', 'store', 'product', 'merch', 'shirt', 'tshirt', 'oil', 'skincare', 'supplement', 'dog'],
+    answer: 'Yes! Our retail corner has Rowe Casa Organics (supplements, essential oils, skincare, household cleaners, first-aid remedies), Curly and Spot dog treats, Wild Bunch T-shirts, premium tea leaves, and organic household goods.',
+  },
+  {
+    question: 'Allergies & dietary needs?',
+    keywords: ['allergy', 'allergies', 'allergen', 'gluten', 'vegan', 'vegetarian', 'dairy', 'nut', 'nuts', 'peanut', 'soy', 'diet', 'dietary'],
+    answer: 'For allergies or dietary needs, please call us at (567) 938-8900 before ordering so our team can help with ingredient questions.',
   },
 ];

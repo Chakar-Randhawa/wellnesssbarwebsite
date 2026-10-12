@@ -1,5 +1,5 @@
-import { Award, Heart, Leaf, Shield } from 'lucide-react';
-import { FOUNDER, BRAND, type PageId } from '@/data/content';
+import { Award, Heart, Leaf, Shield, User } from 'lucide-react';
+import { FOUNDER, type PageId } from '@/data/content';
 
 interface StoryProps {
   onNavigate: (page: PageId) => void;
@@ -11,11 +11,11 @@ export default function Story({ onNavigate }: StoryProps) {
       <div className="container mx-auto">
         {/* Header */}
         <div className="text-center mb-16">
-          <span className="text-xs tracking-luxe uppercase text-accent-600 reveal-text" style={{ animationDelay: '0.1s' }}>
+          <span className="text-xs tracking-luxe uppercase text-accent-400 reveal-text" style={{ animationDelay: '0.1s' }}>
             The Nurse's Vision
           </span>
-          <h1 className="luxury-heading text-charcoal-700 mt-3 reveal-text" style={{ animationDelay: '0.15s', fontSize: 'clamp(2.2rem, 5vw, 3.8rem)' }}>
-            Our Story
+          <h1 className="luxury-heading text-ink-100 mt-3 reveal-text" style={{ animationDelay: '0.15s', fontSize: 'clamp(2.2rem, 5vw, 3.8rem)' }}>
+            Our Story &amp; Vision
           </h1>
         </div>
 
@@ -24,16 +24,28 @@ export default function Story({ onNavigate }: StoryProps) {
           {/* Image */}
           <div className="lg:col-span-2 reveal-text" style={{ animationDelay: '0.2s' }}>
             <div className="relative">
-              <div className="absolute -top-4 -left-4 w-full h-full rounded-3xl opacity-30" style={{ background: 'linear-gradient(135deg, #c7d3ba 0%, #e8e2d4 100%)' }} />
+              <div className="absolute -top-4 -left-4 w-full h-full rounded-3xl opacity-40" style={{ background: 'linear-gradient(135deg, #566e44 0%, #2d3a28 100%)' }} />
               <div className="relative glass-card rounded-3xl overflow-hidden">
-                <img
-                  src={FOUNDER.image}
-                  alt={FOUNDER.name}
-                  className="w-full h-[420px] sm:h-[500px] object-cover"
-                />
-                <div className="absolute bottom-0 left-0 right-0 p-5 text-center" style={{ background: 'linear-gradient(transparent, rgba(244,241,234,0.9))' }}>
-                  <div className="text-[10px] tracking-luxe uppercase text-sage-500 mb-1">Founder</div>
-                  <div className="luxury-heading text-2xl text-charcoal-700">{FOUNDER.name}</div>
+                {FOUNDER.image ? (
+                  <img
+                    src={FOUNDER.image}
+                    alt={FOUNDER.name}
+                    className="w-full h-[420px] sm:h-[500px] object-cover"
+                  />
+                ) : (
+                  <div
+                    className="w-full h-[420px] sm:h-[500px] flex flex-col items-center justify-center gap-4 text-sage-300"
+                    style={{ background: 'linear-gradient(135deg, rgba(86,110,68,0.25) 0%, rgba(30,30,38,0.6) 100%)' }}
+                    role="img"
+                    aria-label={`Photo of ${FOUNDER.name} coming soon`}
+                  >
+                    <User size={72} strokeWidth={1} />
+                    <span className="text-xs tracking-luxe uppercase text-ink-400">Photo coming soon</span>
+                  </div>
+                )}
+                <div className="absolute bottom-0 left-0 right-0 p-5 text-center" style={{ background: 'linear-gradient(transparent, rgba(20,20,26,0.92))' }}>
+                  <div className="text-[11px] tracking-luxe uppercase text-sage-300 mb-1">Founder</div>
+                  <div className="luxury-heading text-2xl text-ink-100">{FOUNDER.name}</div>
                 </div>
               </div>
             </div>
@@ -42,23 +54,23 @@ export default function Story({ onNavigate }: StoryProps) {
           {/* Text */}
           <div className="lg:col-span-3 reveal-text" style={{ animationDelay: '0.3s' }}>
             <div className="flex items-center gap-3 mb-5">
-              <div className="w-12 h-12 rounded-xl flex items-center justify-center text-sage-600" style={{ background: 'rgba(199,211,186,0.3)' }}>
+              <div className="w-12 h-12 rounded-xl flex items-center justify-center text-sage-300" style={{ background: 'rgba(199,211,186,0.3)' }}>
                 <Award size={24} strokeWidth={1.5} />
               </div>
               <div>
-                <h2 className="luxury-heading text-2xl sm:text-3xl text-charcoal-700">{FOUNDER.name}</h2>
-                <p className="text-sm text-sage-600 tracking-wide-2 uppercase">{FOUNDER.title}</p>
+                <h2 className="luxury-heading text-2xl sm:text-3xl text-ink-100">{FOUNDER.name}</h2>
+                <p className="text-sm text-sage-300 tracking-wide-2 uppercase">{FOUNDER.title}</p>
               </div>
             </div>
 
             <div className="inline-flex items-center gap-2 glass-card px-4 py-2 rounded-full mb-6">
-              <Heart size={14} className="text-sage-500" strokeWidth={1.5} />
-              <span className="text-sm text-charcoal-500">{FOUNDER.experience} of Healthcare Experience</span>
+              <Heart size={14} className="text-sage-400" strokeWidth={1.5} />
+              <span className="text-sm text-ink-300">{FOUNDER.experience} of Healthcare Experience</span>
             </div>
 
             <div className="space-y-4">
               {FOUNDER.bio.map((para, i) => (
-                <p key={i} className="text-charcoal-500 leading-relaxed text-base">
+                <p key={i} className="text-ink-300 leading-relaxed text-base">
                   {para}
                 </p>
               ))}
@@ -73,7 +85,7 @@ export default function Story({ onNavigate }: StoryProps) {
               </button>
               <button
                 onClick={() => onNavigate('contact')}
-                className="glass-btn px-6 py-3 rounded-full text-sm tracking-wide-2 uppercase text-charcoal-600 hover:text-sage-600"
+                className="glass-btn px-6 py-3 rounded-full text-sm tracking-wide-2 uppercase text-ink-200 hover:text-sage-300"
               >
                 Visit the Bar
               </button>
@@ -84,8 +96,8 @@ export default function Story({ onNavigate }: StoryProps) {
         {/* Values Grid */}
         <div className="mb-20">
           <div className="text-center mb-12">
-            <span className="text-xs tracking-luxe uppercase text-accent-600">What Drives Us</span>
-            <h2 className="luxury-heading text-charcoal-700 mt-3" style={{ fontSize: 'clamp(1.8rem, 4vw, 2.8rem)' }}>
+            <span className="text-xs tracking-luxe uppercase text-accent-400">What Drives Us</span>
+            <h2 className="luxury-heading text-ink-100 mt-3" style={{ fontSize: 'clamp(1.8rem, 4vw, 2.8rem)' }}>
               Core Values
             </h2>
           </div>
@@ -94,22 +106,22 @@ export default function Story({ onNavigate }: StoryProps) {
             <ValueCard
               icon={<Shield size={26} strokeWidth={1.3} />}
               title="Non-Toxic"
-              text="Chemical-free, pesticide-free, and free from anything your body doesn't recognize as food."
+              text="Prepared fresh daily using only non-toxic ingredients — absolutely nothing artificial."
             />
             <ValueCard
               icon={<Leaf size={26} strokeWidth={1.3} />}
               title="Organic"
-              text="Certified organic ingredients sourced from trusted farms that respect the soil."
+              text="Premium organic ingredients in everything we serve."
             />
             <ValueCard
               icon={<Heart size={26} strokeWidth={1.3} />}
               title="Holistic"
-              text="Healing through nutrition — the intersection of clinical knowledge and natural wellness."
+              text="A deep passion for healing, health, and holistic wellness."
             />
             <ValueCard
               icon={<Award size={26} strokeWidth={1.3} />}
-              title="Evidence-Based"
-              text="Founded on two decades of nursing experience. Real science, real results."
+              title="Nurse-Led"
+              text="Founded by a Registered Nurse with over two decades of experience serving the community."
             />
           </div>
         </div>
@@ -120,12 +132,12 @@ export default function Story({ onNavigate }: StoryProps) {
           <div className="absolute -bottom-16 -right-16 w-48 h-48 rounded-full opacity-20" style={{ background: 'radial-gradient(circle, #e8e2d4 0%, transparent 70%)' }} />
           <div className="relative z-10">
             <div className="text-5xl luxury-heading text-sage-300 leading-none mb-2">&ldquo;</div>
-            <p className="luxury-heading luxury-italic text-charcoal-600 text-xl sm:text-2xl lg:text-3xl max-w-3xl mx-auto leading-snug">
-              Food should be medicine, and medicine should be delicious. That is not a trend — it is a nurse's promise.
+            <p className="luxury-heading luxury-italic text-ink-200 text-xl sm:text-2xl lg:text-3xl max-w-3xl mx-auto leading-snug">
+              What you put into your body matters.
             </p>
             <div className="mt-6 flex items-center justify-center gap-3">
               <div className="w-8 h-px bg-sage-400" />
-              <span className="text-sm tracking-wide-2 uppercase text-sage-600">Lacie Pace, RN</span>
+              <span className="text-sm tracking-wide-2 uppercase text-sage-300">Wild Bunch Wellness Bar</span>
               <div className="w-8 h-px bg-sage-400" />
             </div>
           </div>
@@ -134,16 +146,16 @@ export default function Story({ onNavigate }: StoryProps) {
         {/* Info bar */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-16">
           <div className="glass-card rounded-2xl p-6 text-center">
-            <div className="luxury-heading text-3xl text-sage-600">20+</div>
-            <div className="text-xs tracking-wide-2 uppercase text-charcoal-400 mt-1">Years in Healthcare</div>
+            <div className="luxury-heading text-3xl text-sage-300">20+</div>
+            <div className="text-xs tracking-wide-2 uppercase text-ink-400 mt-1">Years in Healthcare</div>
           </div>
           <div className="glass-card rounded-2xl p-6 text-center">
-            <div className="luxury-heading text-3xl text-sage-600">100%</div>
-            <div className="text-xs tracking-wide-2 uppercase text-charcoal-400 mt-1">Organic Ingredients</div>
+            <div className="luxury-heading text-3xl text-sage-300">100%</div>
+            <div className="text-xs tracking-wide-2 uppercase text-ink-400 mt-1">Organic Ingredients</div>
           </div>
           <div className="glass-card rounded-2xl p-6 text-center">
-            <div className="luxury-heading text-3xl text-sage-600">0</div>
-            <div className="text-xs tracking-wide-2 uppercase text-charcoal-400 mt-1">Artificial Additives</div>
+            <div className="luxury-heading text-3xl text-sage-300">0</div>
+            <div className="text-xs tracking-wide-2 uppercase text-ink-400 mt-1">Artificial Additives</div>
           </div>
         </div>
       </div>
@@ -154,11 +166,11 @@ export default function Story({ onNavigate }: StoryProps) {
 function ValueCard({ icon, title, text }: { icon: React.ReactNode; title: string; text: string }) {
   return (
     <div className="glass-card rounded-2xl p-6 text-center">
-      <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-sage-600 mx-auto mb-4" style={{ background: 'rgba(199,211,186,0.25)' }}>
+      <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-sage-300 mx-auto mb-4" style={{ background: 'rgba(199,211,186,0.25)' }}>
         {icon}
       </div>
-      <h3 className="luxury-heading text-lg text-charcoal-700 mb-2">{title}</h3>
-      <p className="text-sm text-charcoal-400 leading-relaxed">{text}</p>
+      <h3 className="luxury-heading text-lg text-ink-100 mb-2">{title}</h3>
+      <p className="text-sm text-ink-400 leading-relaxed">{text}</p>
     </div>
   );
 }

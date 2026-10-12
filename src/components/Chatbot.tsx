@@ -27,15 +27,25 @@ export default function Chatbot() {
 
   const findAnswer = (query: string): string => {
     const lower = query.toLowerCase().trim();
+    // Whole-word matching, so "do" never matches "doordash", "tea" never matches "team", etc.
+    const words = lower.split(/[^a-z0-9]+/).filter(Boolean);
+    const matches = (keyword: string) =>
+      words.some(
+        (w) =>
+          w === keyword ||
+          w === keyword + 's' ||
+          w === keyword + 'es' ||
+          (keyword.length >= 5 && w.startsWith(keyword))
+      );
+
     let bestMatch: { score: number; answer: string } = { score: 0, answer: '' };
 
     for (const qa of CHATBOT_DATA) {
       let score = 0;
       for (const keyword of qa.keywords) {
-        if (lower.includes(keyword)) score += 1;
+        if (matches(keyword)) score += 1;
       }
-      if (qa.question.toLowerCase().includes(lower)) score += 3;
-      if (lower.includes(qa.question.toLowerCase().split(' ')[0].toLowerCase())) score += 1;
+      if (lower === qa.question.toLowerCase()) score += 3;
       if (score > bestMatch.score) {
         bestMatch = { score, answer: qa.answer };
       }
@@ -66,7 +76,7 @@ export default function Chatbot() {
     sendMessage(input);
   };
 
-  const quickQuestions = CHATBOT_DATA.slice(0, 4).map((qa) => qa.question);
+  const quickQuestions = ['What are your hours?', 'Where are you located?', 'Do you deliver?', 'Allergies & dietary needs?'];
 
   return (
     <>
@@ -80,7 +90,7 @@ export default function Chatbot() {
           background: 'linear-gradient(135deg, #566e44 0%, #44583a 100%)',
           boxShadow: '0 4px 24px 0 rgba(68, 88, 58, 0.35)',
         }}
-        aria-label="Open chat"
+        aria-label={open ? 'Close chat' : 'Open chat'}
       >
         {open ? (
           <X size={22} className="text-white" strokeWidth={1.5} />
@@ -99,21 +109,21 @@ export default function Chatbot() {
       {open && (
         <div className="fixed bottom-24 right-5 z-50 w-[360px] max-w-[calc(100vw-2.5rem)] glass-strong rounded-3xl overflow-hidden chatbot-enter flex flex-col" style={{ maxHeight: 'min(560px, 70vh)' }}>
           {/* Header */}
-          <div className="px-5 py-4 border-b border-white/30 flex items-center gap-3 chatbot-bg" style={{ background: 'rgba(244,241,234,0.5)' }}>
+          <div className="px-5 py-4 border-b border-white/10 flex items-center gap-3 " style={{ background: 'rgba(24,24,32,0.5)' }}>
             <div className="w-10 h-10 rounded-full flex items-center justify-center shrink-0" style={{ background: 'linear-gradient(135deg, #566e44 0%, #44583a 100%)' }}>
               <Sparkles size={18} className="text-white" strokeWidth={1.5} />
             </div>
             <div>
-              <div className="luxury-heading text-lg text-charcoal-700 leading-none">Wild Bunch Guide</div>
-              <div className="text-[11px] text-sage-500 tracking-wide-2 mt-1 flex items-center gap-1.5">
+              <div className="luxury-heading text-lg text-ink-100 leading-none">Wild Bunch Guide</div>
+              <div className="text-[11px] text-sage-400 tracking-wide-2 mt-1 flex items-center gap-1.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-sage-400" />
-                Online &mdash; Ask me anything
+                Ask me about Wild Bunch
               </div>
             </div>
           </div>
 
           {/* Messages */}
-          <div ref={scrollRef} className="flex-1 overflow-y-auto px-4 py-4 space-y-3 chatbot-msgs-bg" style={{ background: 'rgba(249,246,239,0.4)' }}>
+          <div ref={scrollRef} className="flex-1 overflow-y-auto px-4 py-4 space-y-3 " style={{ background: 'rgba(20,20,26,0.4)' }}>
             {messages.map((msg, i) => (
               <div
                 key={i}
@@ -123,7 +133,7 @@ export default function Chatbot() {
                   className={`max-w-[85%] px-4 py-2.5 rounded-2xl text-sm leading-relaxed ${
                     msg.role === 'user'
                       ? 'text-white rounded-br-md'
-                      : 'glass-card text-charcoal-600 rounded-bl-md'
+                      : 'glass-card text-ink-200 rounded-bl-md'
                   }`}
                   style={
                     msg.role === 'user'
@@ -149,12 +159,12 @@ export default function Chatbot() {
             {/* Quick questions */}
             {messages.length <= 1 && !typing && (
               <div className="pt-2 space-y-2">
-                <p className="text-[11px] text-charcoal-400 tracking-wide-2 uppercase px-1">Quick Questions</p>
+                <p className="text-[11px] text-ink-400 tracking-wide-2 uppercase px-1">Quick Questions</p>
                 {quickQuestions.map((q) => (
                   <button
                     key={q}
                     onClick={() => sendMessage(q)}
-                    className="block w-full text-left glass-card px-3.5 py-2.5 rounded-xl text-sm text-charcoal-500 hover:text-sage-600 transition-colors"
+                    className="block w-full text-left glass-card px-3.5 py-2.5 rounded-xl text-sm text-ink-300 hover:text-sage-300 transition-colors"
                   >
                     {q}
                   </button>
@@ -164,13 +174,13 @@ export default function Chatbot() {
           </div>
 
           {/* Input */}
-          <form onSubmit={handleSubmit} className="px-4 py-3 border-t border-white/30 flex items-center gap-2 chatbot-bg" style={{ background: 'rgba(249,246,239,0.5)' }}>
+          <form onSubmit={handleSubmit} className="px-4 py-3 border-t border-white/10 flex items-center gap-2 " style={{ background: 'rgba(24,24,32,0.5)' }}>
             <input
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder="Type your question..."
-              className="chatbot-input flex-1 bg-white/40 border border-white/50 rounded-full px-4 py-2.5 text-sm text-charcoal-600 placeholder-charcoal-400/60 outline-none focus:border-sage-300 transition-colors"
+              aria-label="Type your question" className="flex-1 bg-white/10 border border-white/10 rounded-full px-4 py-2.5 text-sm text-ink-200 placeholder-ink-400/60 outline-none focus:border-sage-300 transition-colors"
             />
             <button
               type="submit"

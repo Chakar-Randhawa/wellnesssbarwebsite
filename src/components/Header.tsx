@@ -1,16 +1,13 @@
 import { useEffect, useState } from 'react';
-import { Menu as MenuIcon, X, Sun, Moon } from 'lucide-react';
+import { Menu as MenuIcon, X } from 'lucide-react';
 import { BRAND, NAV_LINKS, type PageId } from '@/data/content';
-import type { Theme } from '@/hooks/useTheme';
 
 interface HeaderProps {
   currentPage: PageId;
   onNavigate: (page: PageId) => void;
-  theme: Theme;
-  onToggleTheme: () => void;
 }
 
-export default function Header({ currentPage, onNavigate, theme, onToggleTheme }: HeaderProps) {
+export default function Header({ currentPage, onNavigate }: HeaderProps) {
   const [scrolled, setScrolled] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
 
@@ -30,6 +27,15 @@ export default function Header({ currentPage, onNavigate, theme, onToggleTheme }
     return () => {
       document.body.style.overflow = '';
     };
+  }, [drawerOpen]);
+
+  useEffect(() => {
+    if (!drawerOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setDrawerOpen(false);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
   }, [drawerOpen]);
 
   const handleNav = (page: PageId) => {
@@ -52,10 +58,11 @@ export default function Header({ currentPage, onNavigate, theme, onToggleTheme }
                 <button
                   key={link.id}
                   onClick={() => handleNav(link.id)}
+                  aria-current={currentPage === link.id ? 'page' : undefined}
                   className={`link-underline text-sm tracking-wide-2 uppercase transition-colors duration-300 ${
                     currentPage === link.id
-                      ? 'text-sage-600'
-                      : 'text-charcoal-500 hover:text-sage-600'
+                      ? 'text-sage-300'
+                      : 'text-ink-300 hover:text-sage-300'
                   }`}
                 >
                   {link.label}
@@ -76,10 +83,10 @@ export default function Header({ currentPage, onNavigate, theme, onToggleTheme }
                 } ring-1 ring-white/40`}
               />
               <div className="text-left hidden sm:block">
-                <div className={`luxury-heading leading-none ${scrolled ? 'text-lg' : 'text-xl'} text-charcoal-700`}>
+                <div className={`luxury-heading leading-none ${scrolled ? 'text-lg' : 'text-xl'} text-ink-100`}>
                   Wild Bunch
                 </div>
-                <div className="text-[10px] tracking-luxe uppercase text-sage-500 mt-0.5">
+                <div className="text-[10px] tracking-luxe uppercase text-sage-400 mt-0.5">
                   Wellness Bar
                 </div>
               </div>
@@ -91,43 +98,33 @@ export default function Header({ currentPage, onNavigate, theme, onToggleTheme }
                 <button
                   key={link.id}
                   onClick={() => handleNav(link.id)}
+                  aria-current={currentPage === link.id ? 'page' : undefined}
                   className={`link-underline text-sm tracking-wide-2 uppercase transition-colors duration-300 ${
                     currentPage === link.id
-                      ? 'text-sage-600'
-                      : 'text-charcoal-500 hover:text-sage-600'
+                      ? 'text-sage-300'
+                      : 'text-ink-300 hover:text-sage-300'
                   }`}
                 >
                   {link.label}
                 </button>
               ))}
-              <button
-                onClick={() => handleNav('menu')}
+              <a
+                href={BRAND.doorDash}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="glass-btn-solid px-5 py-2.5 rounded-full text-sm tracking-wide-2 uppercase"
               >
                 Order Now
-              </button>
-              <button
-                onClick={onToggleTheme}
-                className="glass-btn w-10 h-10 rounded-full flex items-center justify-center text-charcoal-600 dark:text-sage-600 hover:text-sage-600 transition-colors"
-                aria-label={theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
-              >
-                {theme === 'light' ? <Moon size={18} strokeWidth={1.5} /> : <Sun size={18} strokeWidth={1.5} />}
-              </button>
+              </a>
             </nav>
 
-            {/* Mobile: Theme toggle + Hamburger */}
+            {/* Mobile: Hamburger */}
             <div className="lg:hidden flex items-center gap-2">
               <button
-                onClick={onToggleTheme}
-                className="flex items-center justify-center w-10 h-10 text-charcoal-600 dark:text-sage-600"
-                aria-label={theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
-              >
-                {theme === 'light' ? <Moon size={20} strokeWidth={1.5} /> : <Sun size={20} strokeWidth={1.5} />}
-              </button>
-              <button
                 onClick={() => setDrawerOpen(true)}
-                className="lg:hidden flex items-center justify-center w-10 h-10 text-charcoal-600 dark:text-sage-600"
+                className="lg:hidden flex items-center justify-center w-10 h-10 text-sage-300"
                 aria-label="Open menu"
+                aria-expanded={drawerOpen}
               >
                 <MenuIcon size={22} strokeWidth={1.5} />
               </button>
@@ -143,8 +140,8 @@ export default function Header({ currentPage, onNavigate, theme, onToggleTheme }
             className="fixed inset-0 z-50 bg-charcoal-900/30 overlay-enter lg:hidden"
             onClick={() => setDrawerOpen(false)}
           />
-          <div className="fixed top-0 right-0 bottom-0 z-50 w-80 max-w-[85vw] glass-strong drawer-enter lg:hidden flex flex-col">
-            <div className="flex items-center justify-between p-6 border-b border-white/30">
+          <div role="dialog" aria-modal="true" aria-label="Site menu" className="fixed top-0 right-0 bottom-0 z-50 w-80 max-w-[85vw] glass-strong drawer-enter lg:hidden flex flex-col">
+            <div className="flex items-center justify-between p-6 border-b border-white/10">
               <div className="flex items-center gap-3">
                 <img
                   src={BRAND.logo}
@@ -152,13 +149,13 @@ export default function Header({ currentPage, onNavigate, theme, onToggleTheme }
                   className="w-10 h-10 rounded-full object-cover ring-1 ring-white/40"
                 />
                 <div>
-                  <div className="luxury-heading text-lg text-charcoal-700 leading-none">Wild Bunch</div>
-                  <div className="text-[9px] tracking-luxe uppercase text-sage-500">Wellness Bar</div>
+                  <div className="luxury-heading text-lg text-ink-100 leading-none">Wild Bunch</div>
+                  <div className="text-[9px] tracking-luxe uppercase text-sage-400">Wellness Bar</div>
                 </div>
               </div>
               <button
                 onClick={() => setDrawerOpen(false)}
-                className="w-9 h-9 flex items-center justify-center text-charcoal-600"
+                className="w-9 h-9 flex items-center justify-center text-ink-200"
                 aria-label="Close menu"
               >
                 <X size={20} strokeWidth={1.5} />
@@ -172,8 +169,8 @@ export default function Header({ currentPage, onNavigate, theme, onToggleTheme }
                   onClick={() => handleNav(link.id)}
                   className={`text-left px-4 py-3.5 rounded-xl text-lg luxury-heading transition-all duration-300 ${
                     currentPage === link.id
-                      ? 'bg-sage-100/60 text-sage-700'
-                      : 'text-charcoal-600 hover:bg-white/30'
+                      ? 'bg-sage-500/20 text-sage-300'
+                      : 'text-ink-200 hover:bg-white/10'
                   }`}
                 >
                   {link.label}
@@ -181,23 +178,19 @@ export default function Header({ currentPage, onNavigate, theme, onToggleTheme }
               ))}
             </nav>
 
-            <div className="mt-auto p-6 border-t border-white/30">
-              <button
-                onClick={() => handleNav('menu')}
-                className="w-full glass-btn-solid py-3 rounded-full text-sm tracking-wide-2 uppercase"
+            <div className="mt-auto p-6 border-t border-white/10">
+              <a
+                href={BRAND.doorDash}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block text-center w-full glass-btn-solid py-3 rounded-full text-sm tracking-wide-2 uppercase"
               >
                 Order Now
-              </button>
-              <button
-                onClick={onToggleTheme}
-                className="w-full glass-btn mt-3 py-3 rounded-full text-sm tracking-wide-2 uppercase text-charcoal-600 dark:text-sage-600 flex items-center justify-center gap-2"
-              >
-                {theme === 'light' ? <><Moon size={16} strokeWidth={1.5} /> Dark Mode</> : <><Sun size={16} strokeWidth={1.5} /> Light Mode</>}
-              </button>
-              <p className="text-center text-xs text-charcoal-400 mt-4 tracking-wide-2">
+              </a>
+              <p className="text-center text-xs text-ink-400 mt-4 tracking-wide-2">
                 {BRAND.hours}
               </p>
-              <p className="text-center text-xs text-charcoal-400 mt-1">
+              <p className="text-center text-xs text-ink-400 mt-1">
                 {BRAND.address}
               </p>
             </div>

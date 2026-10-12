@@ -1,6 +1,5 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  darkMode: 'class',
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
@@ -28,11 +27,14 @@ export default {
           800: '#384931',
           900: '#2d3a28',
         },
+        // Text colours for the dark theme (ink-100 = brightest, ink-400 = dimmest)
+        ink: {
+          100: '#f0f0ea',
+          200: '#d8d8d2',
+          300: '#c0c0b8',
+          400: '#a0a098',
+        },
         charcoal: {
-          400: '#4a4a48',
-          500: '#3a3a38',
-          600: '#2c2c2a',
-          700: '#1e1e1c',
           800: '#161615',
           900: '#0d0d0c',
         },
@@ -44,49 +46,6 @@ export default {
       },
       backdropBlur: {
         xs: '2px',
-      },
-      animation: {
-        'fade-in': 'fadeIn 0.8s ease-out forwards',
-        'fade-in-up': 'fadeInUp 0.7s ease-out forwards',
-        'fade-in-delay-1': 'fadeInUp 0.7s ease-out 0.15s forwards',
-        'fade-in-delay-2': 'fadeInUp 0.7s ease-out 0.3s forwards',
-        'fade-in-delay-3': 'fadeInUp 0.7s ease-out 0.45s forwards',
-        'slide-out': 'slideOut 0.4s ease-out forwards',
-        'slide-in-right': 'slideInRight 0.4s ease-out forwards',
-        'float-slow': 'floatSlow 8s ease-in-out infinite',
-        'float-slower': 'floatSlow 12s ease-in-out infinite',
-        'pulse-ring': 'pulseRing 2s ease-out infinite',
-        'shimmer': 'shimmer 3s linear infinite',
-      },
-      keyframes: {
-        fadeIn: {
-          '0%': { opacity: '0' },
-          '100%': { opacity: '1' },
-        },
-        fadeInUp: {
-          '0%': { opacity: '0', transform: 'translateY(30px)' },
-          '100%': { opacity: '1', transform: 'translateY(0)' },
-        },
-        slideOut: {
-          '0%': { transform: 'translateX(0)' },
-          '100%': { transform: 'translateX(100%)' },
-        },
-        slideInRight: {
-          '0%': { transform: 'translateX(100%)' },
-          '100%': { transform: 'translateX(0)' },
-        },
-        floatSlow: {
-          '0%, 100%': { transform: 'translate(0, 0) scale(1)' },
-          '50%': { transform: 'translate(20px, -30px) scale(1.05)' },
-        },
-        pulseRing: {
-          '0%': { transform: 'scale(0.8)', opacity: '0.5' },
-          '100%': { transform: 'scale(2)', opacity: '0' },
-        },
-        shimmer: {
-          '0%': { backgroundPosition: '-200% center' },
-          '100%': { backgroundPosition: '200% center' },
-        },
       },
     },
   },

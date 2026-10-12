@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { ShoppingBag, ArrowRight } from 'lucide-react';
-import { RETAIL_PRODUCTS, BRAND } from '@/data/content';
+import { RETAIL_PRODUCTS, RETAIL_CATEGORIES, RETAIL_BRANDS, BRAND } from '@/data/content';
 
 export default function Retail() {
-  const categories = ['All', 'Rowe Casa Organics', 'Curly and Spot', 'Wild Bunch Apparel'];
+  const categories = RETAIL_CATEGORIES;
   const [filter, setFilter] = useState('All');
 
   const filtered = filter === 'All' ? RETAIL_PRODUCTS : RETAIL_PRODUCTS.filter((p) => p.category === filter);
@@ -13,15 +13,14 @@ export default function Retail() {
       <div className="container mx-auto">
         {/* Header */}
         <div className="text-center mb-12">
-          <span className="text-xs tracking-luxe uppercase text-accent-600 reveal-text" style={{ animationDelay: '0.1s' }}>
-            Lifestyle & Wellness Corner
+          <span className="text-xs tracking-luxe uppercase text-accent-400 reveal-text" style={{ animationDelay: '0.1s' }}>
+            Wellness Merchandise & Store
           </span>
-          <h1 className="luxury-heading text-charcoal-700 mt-3 reveal-text" style={{ animationDelay: '0.15s', fontSize: 'clamp(2.2rem, 5vw, 3.8rem)' }}>
-            Retail & Merchandise
+          <h1 className="luxury-heading text-ink-100 mt-3 reveal-text" style={{ animationDelay: '0.15s', fontSize: 'clamp(2.2rem, 5vw, 3.8rem)' }}>
+            Non-Toxic &amp; Organic Lifestyle Items
           </h1>
-          <p className="text-charcoal-500 max-w-2xl mx-auto mt-4 reveal-text" style={{ animationDelay: '0.2s' }}>
-            Curated non-toxic wellness products, organic pet treats, and premium apparel —
-            everything you need to live the Wild Bunch lifestyle beyond the bar.
+          <p className="text-ink-300 max-w-2xl mx-auto mt-4 reveal-text" style={{ animationDelay: '0.2s' }}>
+            Explore our curated retail corner featuring premium organic wellness products.
           </p>
         </div>
 
@@ -34,7 +33,7 @@ export default function Retail() {
                   key={cat}
                   onClick={() => setFilter(cat)}
                   className={`px-4 sm:px-5 py-2.5 rounded-full text-xs sm:text-sm tracking-wide-2 uppercase whitespace-nowrap transition-all duration-400 ${
-                    filter === cat ? 'text-white shadow-md' : 'glass-btn text-charcoal-500 hover:text-sage-600'
+                    filter === cat ? 'text-white shadow-md' : 'glass-btn text-ink-300 hover:text-sage-300'
                   }`}
                   style={filter === cat ? { background: 'linear-gradient(135deg, #566e44 0%, #44583a 100%)' } : undefined}
                 >
@@ -47,21 +46,9 @@ export default function Retail() {
 
         {/* Brand Spotlights */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10">
-          <BrandSpotlight
-            name="Rowe Casa Organics"
-            tagline="Non-toxic home & body"
-            blurb="Supplements, essential oils, skincare, and household remedies crafted with pure, clean ingredients."
-          />
-          <BrandSpotlight
-            name="Curly and Spot"
-            tagline="Organic dog treats"
-            blurb="Small-batch, human-grade organic treats for your four-legged family members. Made with love."
-          />
-          <BrandSpotlight
-            name="Wild Bunch Apparel"
-            tagline="Wear the mission"
-            blurb="Premium organic cotton apparel featuring the Wild Bunch crest. Soft, sustainable, and stylish."
-          />
+          {RETAIL_BRANDS.map((b) => (
+            <BrandSpotlight key={b.name} name={b.name} tagline={b.tagline} blurb={b.blurb} />
+          ))}
         </div>
 
         {/* Product Grid */}
@@ -76,10 +63,10 @@ export default function Retail() {
                 <img src={product.image} alt={product.name} className="w-full h-full object-cover" loading="lazy" />
               </div>
               <div className="p-5">
-                <div className="text-[10px] tracking-luxe uppercase text-sage-500 mb-2">{product.brand}</div>
-                <h3 className="luxury-heading text-xl text-charcoal-700 mb-2">{product.name}</h3>
-                <p className="text-sm text-charcoal-400 leading-relaxed line-clamp-3">{product.description}</p>
-                <div className="flex items-center gap-2 mt-4 pt-4 border-t border-white/30 text-sage-600 text-xs tracking-wide-2 uppercase">
+                <div className="text-[10px] tracking-luxe uppercase text-sage-400 mb-2">{product.brand}</div>
+                <h3 className="luxury-heading text-xl text-ink-100 mb-2">{product.name}</h3>
+                <p className="text-sm text-ink-400 leading-relaxed line-clamp-3">{product.description}</p>
+                <div className="flex items-center gap-2 mt-4 pt-4 border-t border-white/10 text-sage-300 text-xs tracking-wide-2 uppercase">
                   <ShoppingBag size={14} strokeWidth={1.5} />
                   Available In-Store
                 </div>
@@ -91,12 +78,12 @@ export default function Retail() {
         {/* Visit CTA */}
         <div className="text-center mt-14">
           <div className="glass-card rounded-3xl px-8 py-10 max-w-2xl mx-auto">
-            <h2 className="luxury-heading text-2xl text-charcoal-700 mb-3">
+            <h2 className="luxury-heading text-2xl text-ink-100 mb-3">
               Shop in person at the bar
             </h2>
-            <p className="text-charcoal-400 text-sm mb-6">
+            <p className="text-ink-400 text-sm mb-6">
               Visit us at {BRAND.address} to browse our full retail collection.
-              Open daily from 7:00 AM to 2:00 PM.
+              Open {BRAND.hours}.
             </p>
             <a
               href={`tel:${BRAND.phone.replace(/[^0-9]/g, '')}`}
@@ -115,9 +102,9 @@ export default function Retail() {
 function BrandSpotlight({ name, tagline, blurb }: { name: string; tagline: string; blurb: string }) {
   return (
     <div className="glass-card rounded-2xl p-5 text-center">
-      <h3 className="luxury-heading text-lg text-charcoal-700">{name}</h3>
-      <div className="text-[10px] tracking-luxe uppercase text-accent-600 mt-1">{tagline}</div>
-      <p className="text-xs text-charcoal-400 leading-relaxed mt-3">{blurb}</p>
+      <h3 className="luxury-heading text-lg text-ink-100">{name}</h3>
+      <div className="text-[10px] tracking-luxe uppercase text-accent-400 mt-1">{tagline}</div>
+      <p className="text-xs text-ink-400 leading-relaxed mt-3">{blurb}</p>
     </div>
   );
 }

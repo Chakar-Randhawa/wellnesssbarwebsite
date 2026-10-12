@@ -29,7 +29,7 @@ export default function Contact() {
               <iframe
                 src={mapSrc}
                 title="Wild Bunch Wellness Bar location map"
-                className="w-full h-full"
+                className="map-iframe w-full h-full"
                 style={{ border: 0, minHeight: '420px', filter: 'saturate(0.8) contrast(0.95)' }}
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"

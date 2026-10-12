@@ -8,11 +8,13 @@ import Menu from '@/pages/Menu';
 import Story from '@/pages/Story';
 import Retail from '@/pages/Retail';
 import Contact from '@/pages/Contact';
+import { useTheme } from '@/hooks/useTheme';
 import type { PageId } from '@/data/content';
 
 export default function App() {
   const [page, setPage] = useState<PageId>('home');
   const [transitioning, setTransitioning] = useState(false);
+  const { theme, toggle } = useTheme();
 
   const handleNavigate = useCallback((next: PageId) => {
     if (next === page) return;
@@ -54,7 +56,7 @@ export default function App() {
       </div>
 
       <CustomCursor />
-      <Header currentPage={page} onNavigate={handleNavigate} />
+      <Header currentPage={page} onNavigate={handleNavigate} theme={theme} onToggleTheme={toggle} />
 
       <main className={`transition-opacity duration-200 ${transitioning ? 'opacity-0' : 'opacity-100'}`}>
         {renderPage()}

@@ -1,13 +1,16 @@
 import { useEffect, useState } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu as MenuIcon, X, Sun, Moon } from 'lucide-react';
 import { BRAND, NAV_LINKS, type PageId } from '@/data/content';
+import type { Theme } from '@/hooks/useTheme';
 
 interface HeaderProps {
   currentPage: PageId;
   onNavigate: (page: PageId) => void;
+  theme: Theme;
+  onToggleTheme: () => void;
 }
 
-export default function Header({ currentPage, onNavigate }: HeaderProps) {
+export default function Header({ currentPage, onNavigate, theme, onToggleTheme }: HeaderProps) {
   const [scrolled, setScrolled] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
 
@@ -103,16 +106,32 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
               >
                 Order Now
               </button>
+              <button
+                onClick={onToggleTheme}
+                className="glass-btn w-10 h-10 rounded-full flex items-center justify-center text-charcoal-600 dark:text-sage-600 hover:text-sage-600 transition-colors"
+                aria-label={theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
+              >
+                {theme === 'light' ? <Moon size={18} strokeWidth={1.5} /> : <Sun size={18} strokeWidth={1.5} />}
+              </button>
             </nav>
 
-            {/* Mobile: Hamburger */}
-            <button
-              onClick={() => setDrawerOpen(true)}
-              className="lg:hidden flex items-center justify-center w-10 h-10 text-charcoal-600"
-              aria-label="Open menu"
-            >
-              <Menu size={22} strokeWidth={1.5} />
-            </button>
+            {/* Mobile: Theme toggle + Hamburger */}
+            <div className="lg:hidden flex items-center gap-2">
+              <button
+                onClick={onToggleTheme}
+                className="flex items-center justify-center w-10 h-10 text-charcoal-600 dark:text-sage-600"
+                aria-label={theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
+              >
+                {theme === 'light' ? <Moon size={20} strokeWidth={1.5} /> : <Sun size={20} strokeWidth={1.5} />}
+              </button>
+              <button
+                onClick={() => setDrawerOpen(true)}
+                className="lg:hidden flex items-center justify-center w-10 h-10 text-charcoal-600 dark:text-sage-600"
+                aria-label="Open menu"
+              >
+                <MenuIcon size={22} strokeWidth={1.5} />
+              </button>
+            </div>
           </div>
         </div>
       </header>
@@ -168,6 +187,12 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
                 className="w-full glass-btn-solid py-3 rounded-full text-sm tracking-wide-2 uppercase"
               >
                 Order Now
+              </button>
+              <button
+                onClick={onToggleTheme}
+                className="w-full glass-btn mt-3 py-3 rounded-full text-sm tracking-wide-2 uppercase text-charcoal-600 dark:text-sage-600 flex items-center justify-center gap-2"
+              >
+                {theme === 'light' ? <><Moon size={16} strokeWidth={1.5} /> Dark Mode</> : <><Sun size={16} strokeWidth={1.5} /> Light Mode</>}
               </button>
               <p className="text-center text-xs text-charcoal-400 mt-4 tracking-wide-2">
                 {BRAND.hours}

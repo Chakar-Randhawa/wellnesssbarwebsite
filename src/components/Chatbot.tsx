@@ -99,7 +99,7 @@ export default function Chatbot() {
       {open && (
         <div className="fixed bottom-24 right-5 z-50 w-[360px] max-w-[calc(100vw-2.5rem)] glass-strong rounded-3xl overflow-hidden chatbot-enter flex flex-col" style={{ maxHeight: 'min(560px, 70vh)' }}>
           {/* Header */}
-          <div className="px-5 py-4 border-b border-white/30 flex items-center gap-3" style={{ background: 'rgba(244,241,234,0.5)' }}>
+          <div className="px-5 py-4 border-b border-white/30 flex items-center gap-3 chatbot-bg" style={{ background: 'rgba(244,241,234,0.5)' }}>
             <div className="w-10 h-10 rounded-full flex items-center justify-center shrink-0" style={{ background: 'linear-gradient(135deg, #566e44 0%, #44583a 100%)' }}>
               <Sparkles size={18} className="text-white" strokeWidth={1.5} />
             </div>
@@ -113,7 +113,7 @@ export default function Chatbot() {
           </div>
 
           {/* Messages */}
-          <div ref={scrollRef} className="flex-1 overflow-y-auto px-4 py-4 space-y-3" style={{ background: 'rgba(249,246,239,0.4)' }}>
+          <div ref={scrollRef} className="flex-1 overflow-y-auto px-4 py-4 space-y-3 chatbot-msgs-bg" style={{ background: 'rgba(249,246,239,0.4)' }}>
             {messages.map((msg, i) => (
               <div
                 key={i}
@@ -164,13 +164,13 @@ export default function Chatbot() {
           </div>
 
           {/* Input */}
-          <form onSubmit={handleSubmit} className="px-4 py-3 border-t border-white/30 flex items-center gap-2" style={{ background: 'rgba(249,246,239,0.5)' }}>
+          <form onSubmit={handleSubmit} className="px-4 py-3 border-t border-white/30 flex items-center gap-2 chatbot-bg" style={{ background: 'rgba(249,246,239,0.5)' }}>
             <input
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder="Type your question..."
-              className="flex-1 bg-white/40 border border-white/50 rounded-full px-4 py-2.5 text-sm text-charcoal-600 placeholder-charcoal-400/60 outline-none focus:border-sage-300 transition-colors"
+              className="chatbot-input flex-1 bg-white/40 border border-white/50 rounded-full px-4 py-2.5 text-sm text-charcoal-600 placeholder-charcoal-400/60 outline-none focus:border-sage-300 transition-colors"
             />
             <button
               type="submit"

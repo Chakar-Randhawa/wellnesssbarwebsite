@@ -32,7 +32,7 @@ export default function Home({ onNavigate }: HomeProps) {
                 alt="Organic wellness"
                 className="w-full h-full object-cover"
               />
-              <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(244,241,234,0.3) 0%, rgba(244,241,234,0.5) 50%, rgba(244,241,234,0.85) 100%)' }} />
+              <div className="hero-overlay absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(244,241,234,0.3) 0%, rgba(244,241,234,0.5) 50%, rgba(244,241,234,0.85) 100%)' }} />
             </div>
           ))}
         </div>
